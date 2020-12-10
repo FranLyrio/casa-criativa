@@ -14,8 +14,11 @@ export const Content = styled.div`
   flex-direction: column;
   margin-top: 25vh;
 
+  a {
+    margin: 32px 0;
+  }
+
   p {
-    text-align: center;
     font-size: 18px;
     line-height: 32px;
   }
@@ -27,27 +30,6 @@ export const Ideas = styled.div`
   padding: 8px 48px;
 
   > a {
-    position: fixed;
-    bottom: 50px;
-  }
-
-  div {
-    button {
-      border: none;
-      background-color: transparent;
-      width: 16px;
-      height: 16px;
-      transform: translateX(550px);
-      color: #ffffff;
-      transition: 0.2s;
-
-      &:hover {
-        color: #01ffc2;
-      }
-
-      & + button {
-        margin-left: 8px;
-      }
-    }
+    margin-top: 2vh;
   }
 `;

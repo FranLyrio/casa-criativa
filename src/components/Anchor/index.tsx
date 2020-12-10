@@ -2,13 +2,11 @@ import React, { AnchorHTMLAttributes } from 'react';
 
 import { AnchorStyle } from './style';
 
-interface AnchorProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
-  background?: string;
-}
+type AnchorProps = AnchorHTMLAttributes<HTMLAnchorElement>;
 
-const Anchor: React.FC<AnchorProps> = ({ children, background, ...rest }) => {
+const Anchor: React.FC<AnchorProps> = ({ children, ...rest }) => {
   return (
-    <AnchorStyle href="/" background={background} {...rest}>
+    <AnchorStyle href="/" {...rest}>
       {children}
     </AnchorStyle>
   );

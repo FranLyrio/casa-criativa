@@ -1,4 +1,4 @@
-import { tint } from 'polished';
+import { shade } from 'polished';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -10,7 +10,7 @@ export const Container = styled.div`
   height: 85vh;
 
   a {
-    color: #01ffc2;
+    color: #ff008e;
     font-size: 20px;
     font-weight: 500;
 
@@ -54,9 +54,10 @@ export const Container = styled.div`
       padding: 16px 0;
       background-color: #ff008e;
       color: #ffffff;
+      transition: 0.2s;
 
       &:hover {
-        background-color: ${tint(0.3, '#ff008e')};
+        background-color: ${shade(0.2, '#ff008e')};
       }
     }
   }

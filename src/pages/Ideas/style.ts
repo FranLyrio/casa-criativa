@@ -10,7 +10,7 @@ export const Container = styled.div`
   margin-top: 32px;
 
   a {
-    color: #01ffc2;
+    color: #ff008e;
     font-size: 20px;
     font-weight: 500;
 
@@ -19,25 +19,5 @@ export const Container = styled.div`
     position: fixed;
     top: 10px;
     left: 150px;
-  }
-
-  div {
-    button {
-      border: none;
-      background-color: transparent;
-      width: 16px;
-      height: 16px;
-      transform: translateX(550px);
-      color: #ffffff;
-      transition: 0.2s;
-
-      &:hover {
-        color: #01ffc2;
-      }
-
-      & + button {
-        margin-left: 8px;
-      }
-    }
   }
 `;

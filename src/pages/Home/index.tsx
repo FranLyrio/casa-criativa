@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { FiEdit, FiTrash } from 'react-icons/fi';
 
 import api from '../../services/api';
 
@@ -19,22 +18,20 @@ interface Idea {
 
 const Home: React.FC = () => {
   const [latestIdeas, setLatestIdeas] = useState<Idea[]>([]);
+
   const history = useHistory();
-  const url = 'idea';
 
   useEffect(() => {
-    api.get(`/${url}/`).then(response => {
-      setLatestIdeas(response.data);
+    api.get('idea').then(response => {
+      const [data] = response.data;
+      setLatestIdeas(data);
     });
   }, [latestIdeas]);
 
-  const deleteIdea = useCallback(
-    (id: string) => {
-      api.delete(`/${url}/${id}`);
-      history.push('/');
-    },
-    [history],
-  );
+  const deleteIdea = useCallback((id: string) => {
+    api.delete(`idea/${id}`);
+    window.location.reload();
+  }, []);
 
   const updateIdea = useCallback(
     (id: string) => {
@@ -60,24 +57,17 @@ const Home: React.FC = () => {
 
       <Ideas>
         {latestIdeas.map(idea => (
-          <Idea key={idea.id}>
-            <h3>{idea.title}</h3>
-            <p>{idea.category}</p>
-            <p>{idea.description}</p>
-            <div>
-              <button type="button" onClick={() => updateIdea(idea.id)}>
-                <FiEdit />
-              </button>
-              <button type="button" onClick={() => deleteIdea(idea.id)}>
-                <FiTrash />
-              </button>
-            </div>
-          </Idea>
+          <Idea
+            key={idea.id}
+            id={idea.id}
+            title={idea.title}
+            category={idea.category}
+            description={idea.description}
+            deleteIdea={(id: string) => deleteIdea(id)}
+            updateIdea={(id: string) => updateIdea(id)}
+          />
         ))}
-
-        <Anchor background="pink" href="ideas">
-          Ver mais ideias!
-        </Anchor>
+        <Anchor href="ideas">Ver mais ideias!</Anchor>
       </Ideas>
     </Container>
   );

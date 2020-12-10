@@ -8,6 +8,7 @@ import Input from '../../components/Input';
 
 import api from '../../services/api';
 import Idea from '../../components/Idea';
+import Anchor from '../../components/Anchor';
 
 interface Idea {
   id: string;
@@ -54,9 +55,10 @@ const AddIdea: React.FC = () => {
   return (
     <Container>
       <a href="/">
-        <FiChevronLeft size={25} color="#01ffc2" />
+        <FiChevronLeft size={25} color="#ff008e" />
         Voltar
       </a>
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
           defaultValue={idea?.title}

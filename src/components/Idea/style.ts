@@ -1,43 +1,42 @@
+import { shade } from 'polished';
 import styled from 'styled-components';
 
 export const Container = styled.div`
   background-color: #d60077;
-  color: #ffffff;
   border-radius: 6px;
-  margin-bottom: 8px;
+  width: 40vw;
+  padding: 16px 32px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: 0.3s;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  &:hover {
+    transform: translateX(5px);
+  }
 
-  padding: 16px 48px;
-  width: 670px;
-
-  p {
-    font-size: 13px;
-    font-weight: 300;
-    letter-spacing: 3px;
-    margin-bottom: 16px;
-    max-width: 100%;
+  & + div {
+    margin-top: 8px;
   }
 
   p + p {
-    font-size: 16px;
-    letter-spacing: 1px;
+    margin-top: 10px;
   }
 
-  a {
+  button {
+    border: none;
+    background-color: transparent;
+    width: 16px;
+    height: 16px;
+    transform: translateX(35vw);
     color: #ffffff;
-    text-align: right;
     transition: 0.2s;
 
     &:hover {
-      color: #01ffc2;
+      color: ${shade(0.3, '#121214')};
+    }
+
+    & + button {
+      margin-left: 8px;
     }
   }
 `;
-
-// <h3>Brincar com seu cachorro 🐶</h3>
-// <p>Lazer</p>
-// <p>SABGIDGSADSADHIASDBAI</p>
-// <a href="/">+ detalhes</a>

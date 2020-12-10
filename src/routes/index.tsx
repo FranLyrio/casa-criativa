@@ -9,7 +9,7 @@ import AddIdea from '../pages/AddIdea';
 const Routes: React.FC = () => (
   <Switch>
     <Route path="/" exact component={Home} />
-    <Route path="/ideas/:page?" component={Ideas} />
+    <Route path="/ideas" component={Ideas} />
     <Route path="/create" component={AddIdea} />
     <Route path="/edit/:id" component={AddIdea} />
   </Switch>

@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { FiChevronLeft, FiTrash } from 'react-icons/fi';
+import { useHistory } from 'react-router-dom';
+
+import { FiChevronLeft } from 'react-icons/fi';
 import api from '../../services/api';
 import { Container } from './style';
 
@@ -15,18 +17,30 @@ interface Idea {
 }
 
 const Ideas: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState<number>();
-  const [total, setTotal] = useState<number>();
+  const history = useHistory();
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>();
   const [ideas, setIdeas] = useState<Idea[]>([]);
 
   useEffect(() => {
-    api.get(`idea/${currentPage}`).then(response => {
+    api.get(`idea?page=${currentPage}`).then(response => {
       const [dataPerPage, count] = response.data;
 
+      const pages = count / 4;
+      const roundedNumber = Math.ceil(pages);
+
       setIdeas(dataPerPage);
-      setTotal(count / 4);
+      setTotalPages(roundedNumber);
     });
-  }, [total, currentPage]);
+  }, [totalPages, currentPage]);
+
+  const updateIdea = useCallback(
+    (id: string) => {
+      history.push(`/edit/${id}`);
+    },
+    [history],
+  );
 
   const deleteIdea = useCallback((id: string) => {
     api.delete(`idea/${id}`);
@@ -36,24 +50,25 @@ const Ideas: React.FC = () => {
   return (
     <Container>
       <a href="/">
-        <FiChevronLeft size={25} color="#01ffc2" />
+        <FiChevronLeft size={25} color="#ff008e" />
         Voltar
       </a>
+
       {ideas.map(idea => (
-        <Idea key={idea.id}>
-          <h3>{idea.title}</h3>
-          <p>{idea.category}</p>
-          <p>{idea.description}</p>
-          <div>
-            <button type="button" onClick={() => deleteIdea(idea.id)}>
-              <FiTrash />
-            </button>
-          </div>
-        </Idea>
+        <Idea
+          key={idea.id}
+          id={idea.id}
+          title={idea.title}
+          category={idea.category}
+          description={idea.description}
+          updateIdea={(id: string) => updateIdea(id)}
+          deleteIdea={(id: string) => deleteIdea(id)}
+        />
       ))}
 
       <Pagination
-        totalPages={total}
+        currentPage={currentPage}
+        totalPages={totalPages}
         goToPage={(page: number) => setCurrentPage(page)}
       />
     </Container>
